@@ -5,7 +5,7 @@ public class Assignment : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-         As01_CheckNumberSign();
+        // As01_CheckNumberSign();
         // As02_GetDayName();
         // As03_ValidatePassword();
         // As04_GetGrade();
@@ -35,7 +35,7 @@ public class Assignment : MonoBehaviour
         }
         // TODO: Implement logic to determine sign
         // Example: Debug.Log("Positive");
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public int as02Day;
@@ -75,7 +75,7 @@ public class Assignment : MonoBehaviour
         }
         // TODO: Implement logic to return day name
         // Example: Debug.Log("Monday");
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public string as03InputPassword;
@@ -92,7 +92,7 @@ public class Assignment : MonoBehaviour
         }
         // TODO: Implement password validation logic
         // Example: Debug.Log("True");
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public int as04Score;
@@ -120,7 +120,7 @@ public class Assignment : MonoBehaviour
         }
         // TODO: Implement logic to return grade
         // Example: Debug.Log("A");
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public int as05Year;
@@ -146,34 +146,32 @@ public class Assignment : MonoBehaviour
         }    
         // TODO: Implement leap year check logic
         // Example: Debug.Log("True");
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public double as06Num1;
     public char as06Op;
     public double as06Num2;
-    public double result;
     public void As06_Calculate()
     {
+        double result;
         switch (as06Op)
         {
             case '+': result = as06Num1 + as06Num2; break;
+            case '-': result = as06Num1 - as06Num2; break;
+            case '*': result = as06Num1 * as06Num2; break;
             case '/':
                 if (as06Num2 == 0)
-                {
                     Debug.Log("Error: Cannot divide by zero.");
-                }
                 else
-                {
                     result = as06Num1 / as06Num2; break;
-                }
             default:
                 Debug.Log("Invalid operator. Please use +, -, *, or /.");
                 return;
         }
         // TODO: Implement calculator logic
         // Example: Debug.Log("Result: 42");
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public int as07Month;
@@ -197,11 +195,11 @@ public class Assignment : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not a month");
+            Debug.Log("Invalid month number. Please enter a number between 1 and 12.");
         }
         // TODO: Implement logic to return season
         // Example: Debug.Log("Summer");
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public int as08Quantity;
@@ -211,25 +209,24 @@ public class Assignment : MonoBehaviour
     {
         if (as08Quantity <= 0)
         {
-            Debug.Log("สินค้าหมด");
+            Debug.Log("Out of stock");
         }
         else if (as08Quantity > 0)
         {
             if (as08Payment >= as08Price)
             {
-                Debug.Log("คุณได้รับสินค้าแล้ว");
-                if(as08Price > as08Payment)
+                Debug.Log("You have received the product.");
+                if(as08Payment > as08Price)
                 {
-                    +as08Price - as08Payment;
-                    Debug.Log("คุณได้รับเงินทอน" as08Price - as08Payment "บาท");
+                    Debug.Log("You have" + (as08Payment - as08Price) + "baht in change.");
                 }
             }
             else if (as08Payment < as08Price)
             {
-                Debug.Log("คุณมีเงินไม่พอ");
+                Debug.Log("You don't have enough money.");
             }
         }
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public int as09UserChoice;
@@ -293,24 +290,74 @@ public class Assignment : MonoBehaviour
                 Debug.Log("Choose");
             }
         }
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public string as10WeaponType;
     public int as10BaseDamage;
     public void As10_CalculateWeaponDamage()
     {
+        double multiplier = 1.0;
+        switch (as10WeaponType?.ToLower())
+        {
+            case "sword":multiplier = 1.3;break;
+            case "axe":multiplier = 1.4;break;
+            case "bow":multiplier = 1.2;break;
+            case "staff":multiplier = 1.5;break;
+            case "dagger":multiplier = 1.1;break;
+            default:multiplier = 1.0; break;
+        }
+        int totalDamage = (int)(as10BaseDamage * multiplier);
+        Debug.Log(totalDamage.ToString());
         // TODO: Add your implementation here
         // Example: Debug.Log("result as string");
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public int as11Score;
     public int as11CompletionTime;
     public void As11_DeterminePlayerRank()
     {
+        if (as11Score < 0 || as11CompletionTime < 0)
+        {
+            Debug.Log("Invalid score or time");
+            return;
+        }
+        string rank; int baseCoins;
+        if (as11Score >= 8000)
+        {
+            rank = "Gold";
+            baseCoins = 100;
+        }
+        else if (as11Score >= 6000 && as11Score < 8000)
+        {
+            rank = "Silver";
+            baseCoins = 75;
+        }
+        else if (as11Score >= 4000 && as11Score < 2000)
+        {
+            rank = "Bronze";
+            baseCoins = 50;
+        }
+        else
+        {
+            rank = "None";
+            baseCoins = 0;
+        }
+
+        int timeBonus = 0;
+        if (as11CompletionTime <= 30)
+        {
+            timeBonus = 25;
+        }
+        else if (as11CompletionTime <= 60)
+        {
+            timeBonus = 10;
+        }
+        int totalCoins = baseCoins + timeBonus;
+        Debug.Log($"{rank} Rank - {totalCoins} coins earned!");
         // TODO: Add your implementation here
         // Example: Debug.Log("result as string");
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 }
